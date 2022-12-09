@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <form action="/add-trip" method="post" enctype="multipart/form-data">
+        <label for="title">Start</label>
+        <input type="text" id="start" name="start">
+        <label for="destination">Destination</label>
+        <input type="text" id="destination" name="destination">
+        <label for="comment">Kommentar</label>
+        <input type="text" id="comment" name="comment">
+        <button type="submit">Submit</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+{% endblock %}
