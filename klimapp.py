@@ -14,7 +14,10 @@ with open("secret_key", "rb") as secretKeyFile:
     app.secret_key = secretKeyFile.read()
 
 
-GOALS = {"money": {"title": "saved money", "target": 800}}
+GOALS = {"money": {"title": "saved money", "target": 800},
+         "miles": {"title": "miles", "target": 8000},
+         "cities": {"title": "cities", "target": 80},
+         "trips": {"title": "trips", "target": 80}}
 
 
 @app.route("/", methods=["GET", "POST"])

@@ -1,43 +1,59 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div>
-        <h2>Goal overview</h2>
-        Money</a>
-    </div>
+    <div class="card p-3 mb-3">
+        <h2 class="card-title">Goal overview</h2>
 
-    <div class="card" style="width: 18rem;">
-      <a href="/goal-details/money">
-        <div class="card-body">
-          <h5 class="card-title">Money</h5>
-          <h6 class="card-subtitle mb-2 text-muted">80 €</h6>
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card">
+                    <a href="/goal-details/money" class="text-decoration-none">
+                        <div class="card-body">
+                            <h5 class="card-title">Money</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">80 €</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <a href="/goal-details/miles" class="text-decoration-none">
+                        <div class="card-body">
+                            <h5 class="card-title">Miles</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">140 Miles</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-      </a>
+
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card">
+                    <a href="/goal-details/cities" class="text-decoration-none">
+                        <div class="card-body">
+                            <h5 class="card-title">Cities</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">13</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <a href="/goal-details/trips" class="text-decoration-none">
+                        <div class="card-body">
+                            <h5 class="card-title">Trips</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">58</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Miles</h5>
-        <h6 class="card-subtitle mb-2 text-muted">140 Miles</h6>
-      </div>
-    </div>
 
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Cities</h5>
-        <h6 class="card-subtitle mb-2 text-muted">13</h6>
-      </div>
-    </div>
-
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Trips</h5>
-        <h6 class="card-subtitle mb-2 text-muted">58</h6>
-      </div>
-    </div>
-
-
-    <div class="card" style="width: 18rem;">
+    <div class="card">
       <div class="card-header">
         Recent Trips
       </div>
