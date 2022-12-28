@@ -2,4 +2,98 @@
 
 {% block content %}
     <h2>Goals</h2>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card">
+                <a href="/goal-details/money" class="text-decoration-none">
+                    <div class="card-body">
+                        <h3 class="card-title">Money</h5>
+
+                        <label for="money_pr" class="d-none">
+                            Money goal progress
+                        </label>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar" id="money_pr"
+                                role="progressbar" style="width: 35%;"
+                                aria-valuenow="25" aria-valuemin="0"
+                                aria-valuemax="100">
+                                80 €
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card">
+                <a href="/goal-details/miles" class="text-decoration-none">
+                    <div class="card-body">
+                        <h3 class="card-title">Miles</h5>
+                        <label for="miles_pr" class="d-none">
+                            Miles goal progress
+                        </label>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar" id="miles_pr"
+                                role="progressbar" style="width: 30%;"
+                                aria-valuenow="25" aria-valuemin="0"
+                                aria-valuemax="100">
+                                1435 miles
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card">
+                <a href="/goal-details/cities" class="text-decoration-none">
+                    <div class="card-body">
+                        <h3 class="card-title">Cities</h5>
+                        <label for="city_pr" class="d-none">
+                            City goal progress
+                        </label>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar" id="city_pr"
+                                role="progressbar" style="width: 10%;"
+                                aria-valuenow="25" aria-valuemin="0"
+                                aria-valuemax="100">
+                                4
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card">
+                <a href="/goal-details/trips" class="text-decoration-none">
+                    <div class="card-body">
+                        <h3 class="card-title">Trips</h5>
+                        <label for="trips_pr" class="d-none">
+                            Trip goal progress
+                        </label>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar" id="trips_pr"
+                                role="progressbar" style="width: 15%;"
+                                aria-valuenow="25" aria-valuemin="0"
+                                aria-valuemax="100">
+                                8
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
