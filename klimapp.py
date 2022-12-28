@@ -4,10 +4,12 @@ Created on Fri Dec  9 16:17:13 2022
 
 @author: Hammerle
 """
+import datetime as dt
 from flask import Flask, render_template, request, flash
 
 
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 with open("secret_key", "rb") as secretKeyFile:
     app.secret_key = secretKeyFile.read()
 
@@ -23,20 +25,27 @@ def index():
 
 @app.route("/add-trip", methods=["GET", "POST"])
 def add_trip():
+    dt_now = dt.datetime.now().strftime("%Y-%m-%dT%H:%M")
+
     if request.method == "GET":
-        return render_template("add_trip.html")
+        return render_template("add_trip.html", dt_now=dt_now)
 
     elif request.method == "POST":
         trip = {
+            "type": request.form.get("type"),
             "start": request.form.get("start"),
-            "destination": request.form.get("destination")
+            "destination": request.form.get("destination"),
+            "comment": request.form.get("comment"),
+            "datetime": request.form.get("datetime"),
+            "price": request.form.get("price")
         }
+        print(trip, flush=True)
         upload_check = trip["start"] and trip["destination"]
         if upload_check:
             flash("Trip was added!")
         else:
             flash("Error in data, try again!")
-        return render_template("add_trip.html", trip=trip)
+        return render_template("add_trip.html", trip=trip, dt_now=dt_now)
 
 
 @app.route("/goals", methods=["GET"])

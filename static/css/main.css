@@ -1,7 +1,52 @@
+:root {
+    --dark-bg: rgb(15, 15, 150);
+    --body-bg: #ddd;
+    --content-bg: #eee;
+}
+
 body {
-    background-color: #eee;
+    background-color: var(--body-bg);
 }
 
 .wrapper {
-    background-color: #fff;
+    background-color: var(--content-bg);
+}
+
+nav {
+    background-color: var(--dark-bg);
+    color: white;
+}
+
+nav a span {
+    color: white;
+    display: block;
+    text-align: center;
+}
+
+nav a svg, nav a i {
+    color: white;
+    display: inline-block;
+}
+
+input[type="radio"]{
+    opacity: 0;
+}
+
+
+label{
+   height: 60px;
+   width: 60px;
+   border-radius: 5px;
+   color: var(--dark-bg);
+   text-align: center;
+   padding-top: 6px;
+}
+
+.bi {
+    font-size: 30px;
+}
+
+input[type="radio"]:checked + label {
+	background-color: var(--dark-bg);
+	color: #ffffff;
 }
