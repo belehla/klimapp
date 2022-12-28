@@ -2,6 +2,7 @@
     --dark-bg: rgb(15, 15, 150);
     --body-bg: #ddd;
     --content-bg: #eee;
+    --white: #ffffff;
 }
 
 body {
@@ -12,19 +13,22 @@ body {
     background-color: var(--content-bg);
 }
 
-nav {
+nav, nav h1 {
     background-color: var(--dark-bg);
     color: white;
 }
 
 nav a span {
-    color: white;
+    color: var(--white);
     display: block;
     text-align: center;
+    font-size: 13px;
+    position: relative;
+    top: -3px;
 }
 
 nav a svg, nav a i {
-    color: white;
+    color: var(--white);
     display: inline-block;
 }
 
@@ -34,19 +38,19 @@ input[type="radio"]{
 
 
 label{
-   height: 60px;
-   width: 60px;
+   height: 65px;
+   width: 65px;
    border-radius: 5px;
    color: var(--dark-bg);
    text-align: center;
-   padding-top: 6px;
+   padding-top: 2px;
 }
 
 .bi {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 input[type="radio"]:checked + label {
 	background-color: var(--dark-bg);
-	color: #ffffff;
+	color: var(--white);
 }

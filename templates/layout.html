@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,47 +12,52 @@
         <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div class="container wrapper">
+        <div class="container wrapper p-0">
 
-            <nav class="nav nav-pills nav-fill sticky-top">
-                <a class="navbar-brand" href="/">
-                    <h1>KLIMAPP</h1>
-                </a>
-                <a class="nav-link" href="/add-trip">
-                    <i class="bi bi-plus-square"></i>
-                    <span>Add Trip</span>
-                </a>
-                <a class="nav-link" href="/profile">
-                    <!-- <i class="bi bi-person-circle"></i> -->
-                    <i class="bi bi-person-square"></i>
-                    <span>Profile</span>
-                </a>
+            <nav class="navbar nav nav-pills nav-fill sticky-top p-0">
+                <div class="container-fluid text-center">
+                    <a class="navbar-brand" href="/">
+                        <h1 class="mb-0">KLIMAPP</h1>
+                    </a>
+
+                    <div class="d-flex">
+                        <a class="nav-link pt-1 pb-1" href="/add-trip">
+                            <i class="bi bi-plus-square"></i>
+                            <span>Add Trip</span>
+                        </a>
+                        <a class="nav-link pt-1 pb-1" href="/profile">
+                            <!-- <i class="bi bi-person-circle"></i> -->
+                            <i class="bi bi-person-square"></i>
+                            <span>Profile</span>
+                        </a>
+                    </div>
+                </div>
             </nav>
 
 
-            <div class="content">
+            <div class="content p-1">
                 {% block content %}
                 {% endblock %}
             </div>
 
-            <nav class="nav nav-pills nav-fill sticky-bottom">
-                <a class="nav-link" href="/">
+            <nav class="nav nav-pills nav-fill sticky-bottom pt-1">
+                <a class="nav-link pt-0 pb-0" href="/">
                     <i class="bi bi-house-door"></i>
                     <span>Home</span>
                 </a>
-                <a class="nav-link" href="/history">
+                <a class="nav-link pt-0 pb-0" href="/history">
                     <i class="bi bi-layout-text-sidebar-reverse"></i>
                     <span>Trips</span>
                 </a>
-                <a class="nav-link" href="/goals">
+                <a class="nav-link pt-0 pb-0" href="/goals">
                     <i class="bi bi-bookmark-star"></i>
                     <span>Goals</span>
                 </a>
-                <a class="nav-link" href="/rewards">
+                <a class="nav-link pt-0 pb-0" href="/rewards">
                     <i class="bi bi-gift"></i>
                     <span>Rewards</span>
                 </a>
-                <a class="nav-link" href="/ticket">
+                <a class="nav-link pt-0 pb-0" href="/ticket">
                     <i class="bi bi-ticket-perforated"></i>
                     <span>Klimaticket</span>
                 </a>

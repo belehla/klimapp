@@ -42,9 +42,9 @@ def add_trip():
         print(trip, flush=True)
         upload_check = trip["start"] and trip["destination"]
         if upload_check:
-            flash("Trip was added!")
+            flash("Trip was added!", "success")
         else:
-            flash("Error in data, try again!")
+            flash("Error in data, try again!", "danger")
         return render_template("add_trip.html", trip=trip, dt_now=dt_now)
 
 
@@ -57,6 +57,11 @@ def goals():
 def goal_details(goal_id):
     if request.method == "GET":
         return render_template("goal_details.html", goal=GOALS[goal_id])
+
+
+@app.route("/rewards", methods=["GET"])
+def rewards():
+    return render_template("rewards.html")
 
 
 @app.route("/ticket", methods=["GET"])

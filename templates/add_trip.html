@@ -6,6 +6,18 @@
       <div class="card-body">
         <h2 class="card-title">Add a Trip</h5>
 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
         <form action="/add-trip" method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
@@ -13,6 +25,7 @@
                     <input class="form-check-input" type="radio" name="type" id="tram" value="tram">
                     <label class="form-check-label" for="tram">
                         <i class="bi bi-train-lightrail-front" aria-hidden="true"></i>
+                        </br>
                         Tram
                     </label>
                 </div>
@@ -20,6 +33,7 @@
                     <input class="form-check-input" type="radio" name="type" id="train" value="train">
                     <label class="form-check-label" for="train">
                         <i class="bi bi-train-front" aria-hidden="true"></i>
+                        </br>
                         Train
                     </label>
                 </div>
@@ -27,6 +41,7 @@
                     <input class="form-check-input" type="radio" name="type" id="bus" value="bus">
                     <label class="form-check-label" for="bus">
                         <i class="bi bi-bus-front-fill" aria-hidden="true"></i>
+                        </br>
                         Bus
                     </label>
                 </div>
@@ -80,13 +95,5 @@
         </form>
       </div>
     </div>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          <p>{{ message }}</p>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
 
 {% endblock %}
