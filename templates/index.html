@@ -3,9 +3,49 @@
 {% block content %}
     <div>
         <h1>Goal overview</h1>
-        <a href="/goal-details/money">Money</a>
+        Money</a>
     </div>
-    <div>
-        <h1>Recent trips</h1>
+
+    <div class="card" style="width: 18rem;">
+      <a href="/goal-details/money">
+        <div class="card-body">
+          <h5 class="card-title">Money</h5>
+          <h6 class="card-subtitle mb-2 text-muted">80 €</h6>
+        </div>
+      </a>
     </div>
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Miles</h5>
+        <h6 class="card-subtitle mb-2 text-muted">140 Miles</h6>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Cities</h5>
+        <h6 class="card-subtitle mb-2 text-muted">13</h6>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Trips</h5>
+        <h6 class="card-subtitle mb-2 text-muted">58</h6>
+      </div>
+    </div>
+
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        Recent Trips
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">a</li>
+        <li class="list-group-item">b</li>
+        <li class="list-group-item">c</li>
+      </ul>
+    </div>
+
 {% endblock %}
