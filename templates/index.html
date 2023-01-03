@@ -54,14 +54,36 @@
 
 
     <div class="card">
-      <div class="card-header">
-        Recent Trips
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">a</li>
-        <li class="list-group-item">b</li>
-        <li class="list-group-item">c</li>
-      </ul>
+        <div class="card-header">
+            <h2 class="card-title mb-0">Recent Trips</h2>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for trip in trips %}
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-2 col-md-1 align-self-center">
+                            {% if trip.type == "tram" %}
+                                <i class="bi bi-train-lightrail-front float-start p-3" aria-hidden="true"></i>
+                            {% elif trip.type == "train" %}
+                                <i class="bi bi-train-front float-start p-3" aria-hidden="true"></i>
+                            {% else %}
+                                <i class="bi bi-bus-front-fill float-start p-3" aria-hidden="true"></i>
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            <h3>
+                                {{ trip.start }} - {{ trip.destination }}
+                            </h3>
+                            <p class="mb-0">{{ trip.datetime }}</p>
+                            {% if trip.price %}
+                                <p class="mb-0">{{ trip.price }} €</p>
+                            {% endif %}
+                            <p class="small mb-0">{{ trip.comment }}</p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 
 {% endblock %}

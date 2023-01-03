@@ -5,6 +5,7 @@ Created on Fri Dec  9 16:17:13 2022
 @author: Hammerle
 """
 import datetime as dt
+import json
 from flask import Flask, render_template, request, flash
 
 
@@ -23,7 +24,9 @@ GOALS = {"money": {"title": "saved money", "target": 800},
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        return render_template("index.html")
+        trips = get_trips()
+        last_trips = sorted(trips, key=lambda x:x["datetime"])[-3:]
+        return render_template("index.html", trips=last_trips)
 
 
 @app.route("/add-trip", methods=["GET", "POST"])
@@ -42,13 +45,14 @@ def add_trip():
             "datetime": request.form.get("datetime"),
             "price": request.form.get("price")
         }
-        print(trip, flush=True)
         upload_check = trip["start"] and trip["destination"]
+        add_trip_to_db(trip)
+
         if upload_check:
             flash("Trip was added!", "success")
         else:
             flash("Error in data, try again!", "danger")
-        return render_template("add_trip.html", trip=trip, dt_now=dt_now)
+        return render_template("add_trip.html", dt_now=dt_now)
 
 
 @app.route("/goals", methods=["GET"])
@@ -80,6 +84,19 @@ def history():
 @app.route("/profile", methods=["GET"])
 def profile():
     return render_template("profile.html")
+
+
+def get_trips():
+    with open("database.json") as file:
+        trips = json.load(file)
+    return trips
+
+
+def add_trip_to_db(trip):
+    trips = get_trips()
+    trips.append(trip)
+    with open("database.json", "w") as file:
+        json.dump(trips, file, indent=4)
 
 
 if __name__ == "__main__":
