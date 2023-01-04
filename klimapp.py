@@ -7,6 +7,8 @@ Created on Fri Dec  9 16:17:13 2022
 import datetime as dt
 import json
 import random
+import numpy as np
+import pandas as pd
 from flask import Flask, render_template, request, flash
 
 
@@ -16,10 +18,10 @@ with open("secret_key", "rb") as secretKeyFile:
     app.secret_key = secretKeyFile.read()
 
 
-GOALS = {"money": {"title": "saved money", "target": 1095},
-         "miles": {"title": "miles", "target": 15683},
-         "cities": {"title": "cities", "target": 100},
-         "trips": {"title": "trips", "target": 300}}
+GOALS = {"money": {"title": "Money", "target": 1095, "legend": "Saved Money"},
+         "miles": {"title": "Miles", "target": 15683, "legend": "Traveled Miles"},
+         "cities": {"title": "Cities", "target": 100, "legend": "Visited Cities"},
+         "trips": {"title": "Trips", "target": 300, "legend": "Number of Trips"}}
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -66,10 +68,21 @@ def goals():
     return render_template("goals.html", progress=progress, goals=GOALS)
 
 
-@app.route("/goal-details/<goal_id>", methods=["GET", "POST"])
+@app.route("/goal-details/<goal_id>", methods=["GET"])
 def goal_details(goal_id):
-    if request.method == "GET":
-        return render_template("goal_details.html", goal=GOALS[goal_id])
+    goal = GOALS[goal_id]
+    trips = pd.DataFrame(get_trips()).sort_values("datetime")
+    trips["month"] = pd.to_datetime(trips['datetime']).dt.to_period("M")
+    trips["price"] = trips["price"].replace("", 0).astype(int)
+    trips["cities"] = np.random.randint(0, 3, size=trips.shape[0])  # TODO: count cities
+
+    trips["miles_cs"] = trips["miles"].cumsum()
+    trips["money_cs"] = trips["price"].cumsum()
+    trips["trips_cs"] = np.arange(trips.shape[0]) + 1
+    trips["cities_cs"] = trips["cities"].cumsum()
+
+    return render_template('goal_details.html', goal=goal, legend=goal["legend"],
+                           values=trips[goal_id + "_cs"], labels=trips["datetime"])
 
 
 @app.route("/rewards", methods=["GET"])

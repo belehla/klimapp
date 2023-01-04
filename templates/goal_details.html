@@ -1,5 +1,61 @@
 {% extends "layout.html" %}
 
+{% block app_title %}
+    <a class="navbar-brand" href="/goals">
+        <h1 class="d-none">KLIMAPP</h1>
+        <i class="bi bi-arrow-left fs-1 ms-2" title="Back to Goals" aria-hidden="true"></i>
+    </a>
+{% endblock %}
+
 {% block content %}
     <h2>{{goal.title}}</h2>
+
+    <canvas id="goalChart" width="600" height="400" class="w-100 h-100"></canvas>
+
+    <script>
+        Chart.defaults.global.responsive = false;
+
+        var chart_data = {
+            labels : [
+                {% for item in labels %}
+                    "{{item}}",
+                {% endfor %}
+            ],
+            datasets: [{
+                label: '{{ legend }}',
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(15,15,150,0.1)",
+                borderColor: "rgba(15,15,150,1)",
+                pointRadius: 2,
+                data: [
+                    {% for item in values %}
+                        {{item}},
+                    {% endfor %}],
+                spanGaps: false
+            }]
+
+        }
+
+        var chart_options = {
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        parser: 'YYYY-MM-DDTHH:ss',
+                        unit: 'month'
+                    }
+                }]
+            }
+        }
+
+        var ctx = document.getElementById("goalChart").getContext("2d");
+        var goalChart = new Chart(ctx, {
+            type: 'line',
+            data: chart_data,
+            options: chart_options
+        });
+
+    </script>
+
 {% endblock %}
