@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="card p-3 mb-3">
-        <h2 class="card-title">Goal overview</h2>
+        <h2 class="card-title fs-3">Goal overview</h2>
 
         <div class="row mb-3">
             <div class="col">
@@ -10,7 +10,7 @@
                     <a href="/goal-details/money" class="text-decoration-none">
                         <div class="card-body">
                             <h5 class="card-title">Money</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">80 €</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{progress.sum_money}} €</h6>
                         </div>
                     </a>
                 </div>
@@ -20,7 +20,7 @@
                     <a href="/goal-details/miles" class="text-decoration-none">
                         <div class="card-body">
                             <h5 class="card-title">Miles</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">140 Miles</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{progress.sum_miles}} Miles</h6>
                         </div>
                     </a>
                 </div>
@@ -33,7 +33,7 @@
                     <a href="/goal-details/cities" class="text-decoration-none">
                         <div class="card-body">
                             <h5 class="card-title">Cities</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">13</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{progress.no_cities}}</h6>
                         </div>
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                     <a href="/goal-details/trips" class="text-decoration-none">
                         <div class="card-body">
                             <h5 class="card-title">Trips</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">58</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{progress.no_trips}}</h6>
                         </div>
                     </a>
                 </div>
@@ -55,7 +55,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title mb-0">Recent Trips</h2>
+            <h2 class="card-title mb-0 fs-3">Recent Trips</h2>
         </div>
         <ul class="list-group list-group-flush">
             {% for trip in trips %}
@@ -63,15 +63,15 @@
                     <div class="row">
                         <div class="col-2 col-md-1 align-self-center">
                             {% if trip.type == "tram" %}
-                                <i class="bi bi-train-lightrail-front float-start p-3" aria-hidden="true"></i>
+                                <i class="bi bi-train-lightrail-front float-start p-3" title="Train" aria-hidden="true"></i>
                             {% elif trip.type == "train" %}
-                                <i class="bi bi-train-front float-start p-3" aria-hidden="true"></i>
+                                <i class="bi bi-train-front float-start p-3" title="Tram" aria-hidden="true"></i>
                             {% else %}
-                                <i class="bi bi-bus-front-fill float-start p-3" aria-hidden="true"></i>
+                                <i class="bi bi-bus-front-fill float-start p-3" title="Bus" aria-hidden="true"></i>
                             {% endif %}
                         </div>
-                        <div class="col">
-                            <h3>
+                        <div class="col align-self-center">
+                            <h3 class="fs-5">
                                 {{ trip.start }} - {{ trip.destination }}
                             </h3>
                             <p class="mb-0">{{ trip.datetime }}</p>

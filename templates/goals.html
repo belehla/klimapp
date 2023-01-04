@@ -14,11 +14,11 @@
                             Money goal progress
                         </label>
                         <div class="progress" style="height: 20px;">
-                            <div class="progress-bar" id="money_pr"
-                                role="progressbar" style="width: 35%;"
-                                aria-valuenow="25" aria-valuemin="0"
-                                aria-valuemax="100">
-                                80 €
+                            <div class="progress-bar" id="money_pr" role="progressbar"
+                                style="width: {{progress.sum_money / goals.money.target * 100}}%;"
+                                aria-valuenow={{progress.sum_money}} aria-valuemin="0"
+                                aria-valuemax={{goals.money.target}}>
+                                {{progress.sum_money}} €
                             </div>
                         </div>
                     </div>
@@ -37,11 +37,11 @@
                             Miles goal progress
                         </label>
                         <div class="progress" style="height: 20px;">
-                            <div class="progress-bar" id="miles_pr"
-                                role="progressbar" style="width: 30%;"
-                                aria-valuenow="25" aria-valuemin="0"
-                                aria-valuemax="100">
-                                1435 miles
+                            <div class="progress-bar" id="miles_pr" role="progressbar"
+                                style="width: {{progress.sum_miles / goals.miles.target * 100}}%;"
+                                aria-valuenow={{progress.sum_miles}} aria-valuemin="0"
+                                aria-valuemax={{goals.miles.target}}>
+                                {{progress.sum_miles}} miles
                             </div>
                         </div>
                     </div>
@@ -60,11 +60,11 @@
                             City goal progress
                         </label>
                         <div class="progress" style="height: 20px;">
-                            <div class="progress-bar" id="city_pr"
-                                role="progressbar" style="width: 10%;"
-                                aria-valuenow="25" aria-valuemin="0"
-                                aria-valuemax="100">
-                                4
+                            <div class="progress-bar" id="city_pr" role="progressbar"
+                                style="width: {{progress.no_cities / goals.cities.target * 100}}%;"
+                                aria-valuenow={{progress.no_cities}} aria-valuemin="0"
+                                aria-valuemax={{goals.cities.target}}>
+                                {{progress.no_cities}}
                             </div>
                         </div>
                     </div>
@@ -83,11 +83,11 @@
                             Trip goal progress
                         </label>
                         <div class="progress" style="height: 20px;">
-                            <div class="progress-bar" id="trips_pr"
-                                role="progressbar" style="width: 15%;"
-                                aria-valuenow="25" aria-valuemin="0"
-                                aria-valuemax="100">
-                                8
+                            <div class="progress-bar" id="trips_pr" role="progressbar"
+                                style="width: {{progress.no_trips / goals.trips.target * 100}}%;"
+                                aria-valuenow={{progress.no_trips}} aria-valuemin="0"
+                                aria-valuemax={{goals.trips.target}}>
+                                {{progress.no_trips}}
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ Created on Fri Dec  9 16:17:13 2022
 """
 import datetime as dt
 import json
+import random
 from flask import Flask, render_template, request, flash
 
 
@@ -15,18 +16,19 @@ with open("secret_key", "rb") as secretKeyFile:
     app.secret_key = secretKeyFile.read()
 
 
-GOALS = {"money": {"title": "saved money", "target": 800},
-         "miles": {"title": "miles", "target": 8000},
-         "cities": {"title": "cities", "target": 80},
-         "trips": {"title": "trips", "target": 80}}
+GOALS = {"money": {"title": "saved money", "target": 1095},
+         "miles": {"title": "miles", "target": 15683},
+         "cities": {"title": "cities", "target": 100},
+         "trips": {"title": "trips", "target": 300}}
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
         trips = get_trips()
+        progress = get_goal_progress(trips)
         last_trips = sorted(trips, key=lambda x:x["datetime"])[-3:]
-        return render_template("index.html", trips=last_trips)
+        return render_template("index.html", progress=progress, trips=last_trips)
 
 
 @app.route("/add-trip", methods=["GET", "POST"])
@@ -43,13 +45,15 @@ def add_trip():
             "destination": request.form.get("destination"),
             "comment": request.form.get("comment"),
             "datetime": request.form.get("datetime"),
-            "price": request.form.get("price")
+            "price": request.form.get("price") or int(random.random() * 100),  # TODO: replace with api req if nan
+            "miles": int(random.random() * 300)  # TODO: replace with api req
         }
         upload_check = trip["start"] and trip["destination"]
         add_trip_to_db(trip)
 
         if upload_check:
-            flash("Trip was added!", "success")
+            flash(f"Trip {trip['start']} - {trip['destination']} was added "
+                  f"with {trip['price']} € and {trip['miles']} miles!", "success")
         else:
             flash("Error in data, try again!", "danger")
         return render_template("add_trip.html", dt_now=dt_now)
@@ -57,7 +61,9 @@ def add_trip():
 
 @app.route("/goals", methods=["GET"])
 def goals():
-    return render_template("goals.html")
+    trips = get_trips()
+    progress = get_goal_progress(trips)
+    return render_template("goals.html", progress=progress, goals=GOALS)
 
 
 @app.route("/goal-details/<goal_id>", methods=["GET", "POST"])
@@ -97,6 +103,17 @@ def add_trip_to_db(trip):
     trips.append(trip)
     with open("database.json", "w") as file:
         json.dump(trips, file, indent=4)
+
+
+def get_goal_progress(trips):
+    progress = {
+        "no_trips": len(trips),
+        "sum_money": sum(int(tr["price"]) for tr in trips if tr["price"] != ""),
+        "no_cities": len(set([tr["start"].lower() for tr in trips] +
+                             [tr["destination"].lower() for tr in trips])),
+        "sum_miles": sum([tr["miles"] for tr in trips])
+    }
+    return progress
 
 
 if __name__ == "__main__":
