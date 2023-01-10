@@ -1,4 +1,2 @@
 # KlimApp
-## Main Idea
-## How to run
-## Team
+Klimaticket App for the course Web Engineering, WS 2022.

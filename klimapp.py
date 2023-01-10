@@ -12,35 +12,33 @@ import pandas as pd
 from flask import Flask, render_template, request, flash
 
 
-app = Flask(__name__)
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-with open("secret_key", "rb") as secretKeyFile:
-    app.secret_key = secretKeyFile.read()
-
+FOLDER = "src/"  # docker
+# FOLDER = ""  # local
 
 GOALS = {"money": {"title": "Money", "target": 1095, "legend": "Saved Money"},
          "miles": {"title": "Miles", "target": 15683, "legend": "Traveled Miles"},
          "cities": {"title": "Cities", "target": 100, "legend": "Visited Cities"},
          "trips": {"title": "Trips", "target": 300, "legend": "Number of Trips"}}
 
+app = Flask(__name__)
+# app.config["TEMPLATES_AUTO_RELOAD"] = True
+with open(f"{FOLDER}secret_key", "rb") as secretKeyFile:
+    app.secret_key = secretKeyFile.read()
 
-@app.route("/", methods=["GET", "POST"])
+
+@app.route("/", methods=["GET"])
 def index():
-    if request.method == "GET":
-        trips = get_trips()
-        progress = get_goal_progress(trips)
-        last_trips = sorted(trips, key=lambda x:x["datetime"])[-3:]
-        return render_template("index.html", progress=progress, trips=last_trips)
+    trips = get_trips()
+    progress = get_goal_progress(trips)
+    last_trips = sorted(trips, key=lambda x:x["datetime"])[-3:]
+    return render_template("index.html", progress=progress, trips=last_trips)
 
 
 @app.route("/add-trip", methods=["GET", "POST"])
 def add_trip():
     dt_now = dt.datetime.now().strftime("%Y-%m-%dT%H:%M")
 
-    if request.method == "GET":
-        return render_template("add_trip.html", dt_now=dt_now)
-
-    elif request.method == "POST":
+    if request.method == "POST":
         trip = {
             "type": request.form.get("type"),
             "start": request.form.get("start"),
@@ -58,7 +56,8 @@ def add_trip():
                   f"with {trip['price']} € and {trip['miles']} miles!", "success")
         else:
             flash("Error in data, try again!", "danger")
-        return render_template("add_trip.html", dt_now=dt_now)
+
+    return render_template("add_trip.html", dt_now=dt_now)
 
 
 @app.route("/goals", methods=["GET"])
@@ -106,7 +105,7 @@ def profile():
 
 
 def get_trips():
-    with open("database.json") as file:
+    with open(f"{FOLDER}database.json") as file:
         trips = json.load(file)
     return trips
 
@@ -114,7 +113,7 @@ def get_trips():
 def add_trip_to_db(trip):
     trips = get_trips()
     trips.append(trip)
-    with open("database.json", "w") as file:
+    with open(f"{FOLDER}database.json", "w") as file:
         json.dump(trips, file, indent=4)
 
 
@@ -130,5 +129,5 @@ def get_goal_progress(trips):
 
 
 if __name__ == "__main__":
-    app.run()  # localhost
-    # app.run(host="0.0.0.0")  # in network
+    # app.run()  # localhost
+    app.run(host="0.0.0.0")  # in network

@@ -1,5 +1,5 @@
 :root {
-    --dark-bg: rgb(15, 15, 150);
+    --dark-bg: rgb(33,60,91);
     --body-bg: #ddd;
     --content-bg: #eee;
     --white: #ffffff;
@@ -11,6 +11,10 @@ body {
 
 .wrapper {
     background-color: var(--content-bg);
+}
+
+.content{
+    min-height: calc(100vh - 65px - 61px);
 }
 
 nav, nav h1 {
@@ -53,4 +57,8 @@ label{
 input[type="radio"]:checked + label {
 	background-color: var(--dark-bg);
 	color: var(--white);
+}
+
+.progress-bar {
+	background-color: var(--dark-bg);
 }
